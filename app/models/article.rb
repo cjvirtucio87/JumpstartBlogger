@@ -2,6 +2,7 @@ class Article < ApplicationRecord
   has_many :comments
   has_many :taggings
   has_many :tags, through: :taggings
+  default_scope -> { order(created_at: :desc) }
 
   def tag_list
     self.tags.map do |tag|
