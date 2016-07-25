@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
   def create
     article = Article.new(article_params)
     article.save
-    render 'show', locals: { article: article }
+    redirect_to article_path(article), locals: { article: article }
   end
 
   def edit
@@ -42,6 +42,6 @@ class ArticlesController < ApplicationController
   private
 
     def article_params
-      params.require(:article).permit(:title,:body)
+      params.require(:article).permit(:title,:body,:tag_list)
     end
 end

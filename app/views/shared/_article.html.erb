@@ -1,6 +1,12 @@
 <div class="card">
   <h1><%= article.title %></h1>
   <p><%= article.body %></p>
+  <ul>
+    <% article.tags.each do |tag| %>
+      <li><%= link_to tag.name, tag_path(tag) %></li>
+    <% end %>
+  </ul> 
+
 
   <h4>Comments</h4>
   <%= render partial: 'shared/comment_form', locals: { article: article,
