@@ -1,0 +1,12 @@
+<div class="card">
+  <h1><%= article.title %></h1>
+  <p><%= article.body %></p>
+
+  <h4>Comments</h4>
+  <%= render partial: 'shared/comment_form', locals: { article: article,
+                                                       comment: comment } %>
+
+  <ul>
+    <%= render partial: 'shared/comment', collection: article.comments %>
+  </ul>
+</div>

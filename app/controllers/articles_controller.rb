@@ -1,0 +1,47 @@
+class ArticlesController < ApplicationController
+
+  def index
+    render 'index', locals: { articles: Article.all,
+                              comment: Comment.new }
+  end
+
+  def show
+    article = Article.find_by(id: params[:id])
+    comment = Comment.new
+    comment.article_id = article.id
+    render 'show', locals: { article: article, comment: comment }
+  end
+
+  def new
+    article = Article.new
+    render new_article_path, locals: { article: article }
+  end
+
+  def create
+    article = Article.new(article_params)
+    article.save
+    render 'show', locals: { article: article }
+  end
+
+  def edit
+    article = Article.find(params[:id])
+    render 'edit', locals: { article: article }
+  end
+
+  def update
+    article = Article.find(params[:id])
+    article.update_attributes(article_params)
+    render 'show', locals: { article: article }
+  end
+
+  def destroy
+    article = Article.delete(params[:id])
+    render 'index'
+  end
+
+  private
+
+    def article_params
+      params.require(:article).permit(:title,:body)
+    end
+end
