@@ -8,7 +8,7 @@ class TagsController < ApplicationController
 
   def show
     tag = Tag.find(params[:id])
-    render'tags/show', locals: { tags: tag }
+    render'tags/show', locals: { tag: tag }
   end
 
 end

@@ -9,7 +9,8 @@ class ArticlesController < ApplicationController
     article = Article.find_by(id: params[:id])
     comment = Comment.new
     comment.article_id = article.id
-    render 'show', locals: { article: article, comment: comment }
+    render 'show', locals: { article: article, 
+                             comment: comment }
   end
 
   def new
