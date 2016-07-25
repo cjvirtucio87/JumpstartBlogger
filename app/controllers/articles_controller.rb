@@ -25,18 +25,23 @@ class ArticlesController < ApplicationController
 
   def edit
     article = Article.find(params[:id])
-    render 'edit', locals: { article: article }
+    render 'edit', locals: { article: article,
+                             comment: Comment.new }
   end
 
   def update
     article = Article.find(params[:id])
     article.update_attributes(article_params)
-    render 'show', locals: { article: article }
+    comment = Comment.new
+    comment.article_id = article.id
+    render 'show', locals: { article: article,
+                             comment: comment }
   end
 
   def destroy
     article = Article.delete(params[:id])
-    render 'index'
+    render 'index', locals: { articles: Article.all, 
+                              comment: Comment.new }
   end
 
   private
